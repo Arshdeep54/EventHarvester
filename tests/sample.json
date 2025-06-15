@@ -1,0 +1,443 @@
+{
+  "statusCode": 200,
+  "data": {
+    "kind": "event",
+    "data": {
+      "api_id": "evt-FKtze1LZGbzqRte",
+      "accepts_usdc_for_usd": false,
+      "calendar": {
+        "access_level": "public",
+        "api_id": "cal-tw14TpfFy0YdOId",
+        "avatar_url": "https://cdn.lu.ma/avatars-default/community_avatar_8.png",
+        "coordinate": null,
+        "cover_image_url": "https://images.lumacdn.com/calendar-defaults/patterns/waves-100.png",
+        "description_short": null,
+        "event_submission_restriction": "none",
+        "geo_city": null,
+        "geo_country": null,
+        "geo_latitude": null,
+        "geo_longitude": null,
+        "geo_region": null,
+        "google_measurement_id": null,
+        "instagram_handle": null,
+        "launch_status": "launched",
+        "linkedin_handle": null,
+        "luma_plus_active": false,
+        "meta_pixel_id": null,
+        "name": "Personal",
+        "personal_user_api_id": "usr-j1ZU5ZX2z0vBKKM",
+        "refund_policy": null,
+        "slug": null,
+        "social_image_url": null,
+        "stripe_account_id": null,
+        "tax_config": null,
+        "tiktok_handle": null,
+        "timezone": null,
+        "tint_color": "#F31A7C",
+        "track_meta_ads_from_luma": false,
+        "twitter_handle": null,
+        "verified_at": null,
+        "website": null,
+        "youtube_handle": null,
+        "payment_methods": [],
+        "solana_treasury_address": null,
+        "charges_enabled": null,
+        "is_personal": true
+      },
+      "meta_pixel_id": null,
+      "coupon": null,
+      "google_measurement_id": null,
+      "stripe_account_id": null,
+      "payment_methods": [],
+      "event": {
+        "api_id": "evt-FKtze1LZGbzqRte",
+        "calendar_api_id": "cal-tw14TpfFy0YdOId",
+        "cover_url": "https://images.lumacdn.com/event-covers/e4/4ebee706-04dc-4efc-b1d7-bcbe71317f91.png",
+        "end_at": "2025-06-14T12:30:00.000Z",
+        "event_type": "independent",
+        "geo_latitude": "52.490657",
+        "geo_longitude": "13.492071",
+        "hide_rsvp": false,
+        "location_type": "offline",
+        "name": "Berlin Breakfast Club",
+        "one_to_one": true,
+        "recurrence_id": null,
+        "show_guest_list": false,
+        "start_at": "2025-06-14T10:00:00.000Z",
+        "timezone": "Europe/Berlin",
+        "url": "n6e7l7hn",
+        "user_api_id": "usr-j1ZU5ZX2z0vBKKM",
+        "visibility": "public",
+        "waitlist_enabled": false,
+        "virtual_info": { "has_access": false },
+        "geo_address_info": {
+          "city": "Berlin",
+          "type": "google",
+          "region": "Berlin",
+          "address": "LUKSO Hub",
+          "country": "Germany",
+          "place_id": "ChIJiazxX_dPqEcR4JxFodYxqJo",
+          "city_state": "Berlin, Berlin",
+          "description": "",
+          "country_code": "DE",
+          "full_address": "LUKSO Hub, Köpenicker Ch 3a, 10317 Berlin, Germany",
+          "apple_maps_place_id": "I979C1C48F9EADCB6",
+          "mode": "shown"
+        },
+        "geo_address_visibility": "public",
+        "coordinate": { "longitude": 13.492071, "latitude": 52.490657 }
+      },
+      "start_at": "2025-06-14T10:00:00.000Z",
+      "guest_data": {
+        "email": null,
+        "name": null,
+        "ticket_key": null,
+        "approval_status": null,
+        "proxy_key": null,
+        "event_tickets": [],
+        "payments": []
+      },
+      "featured_guests": [],
+      "refund_policy": null,
+      "guest_count": 0,
+      "ticket_count": 0,
+      "hosts": [
+        {
+          "api_id": "usr-4LyFHAM9E1IuVGv",
+          "avatar_url": "https://images.lumacdn.com/avatars/uf/ffdf2f69-17cb-4766-b338-530b0cafa6de",
+          "bio_short": "WebApp 👉 http://cryptonomads.org\nCommunity 👉 http://club.cryptonomads.org",
+          "instagram_handle": null,
+          "last_online_at": "2025-06-12T00:25:49.508Z",
+          "linkedin_handle": null,
+          "name": "Crypto Nomads",
+          "tiktok_handle": null,
+          "timezone": "Europe/Prague",
+          "twitter_handle": "CryptoNomads_gm",
+          "username": "cryptonomads",
+          "website": "https://cryptonomads.org/",
+          "youtube_handle": "",
+          "is_visible": true,
+          "access_level": "manager"
+        },
+        {
+          "api_id": "usr-10U88YFRzkY8vEj",
+          "avatar_url": "https://images.lumacdn.com/avatars/9w/cb3d7221-be71-46ce-bac0-fbf0b3f5a42b.jpg",
+          "bio_short": "Data solutions for crypto enterprise analytics across the whole funnel",
+          "instagram_handle": null,
+          "last_online_at": "2025-05-08T12:55:20.720Z",
+          "linkedin_handle": null,
+          "name": "Cookie3",
+          "tiktok_handle": null,
+          "timezone": "Asia/Kuala_Lumpur",
+          "twitter_handle": "cookie3_com",
+          "username": null,
+          "website": null,
+          "youtube_handle": "",
+          "is_visible": true,
+          "access_level": "none"
+        },
+        {
+          "api_id": "usr-7KTKBrSGMhrcOsP",
+          "avatar_url": "https://images.lumacdn.com/avatars/xa/95b0ca64-adac-482e-bdfc-84474e14676c.png",
+          "bio_short": "theMiracle is the first AI-powered infrastructure that connects perks, rewards, and benefits directly to NFTs, tokens, and wallet users.",
+          "instagram_handle": null,
+          "last_online_at": "2025-06-04T18:47:26.532Z",
+          "linkedin_handle": null,
+          "name": "theMiracle",
+          "tiktok_handle": null,
+          "timezone": "Europe/Zurich",
+          "twitter_handle": "themiracle_io",
+          "username": "themiracle",
+          "website": "https://www.themiracle.io",
+          "youtube_handle": "",
+          "is_visible": true,
+          "access_level": "manager"
+        },
+        {
+          "api_id": "usr-nDo0tpYtJtD8d3O",
+          "avatar_url": "https://images.lumacdn.com/avatars/y6/0b2e6769-48cd-4b40-8a8e-1e1e7945a508.png",
+          "bio_short": "Layer Zero for builders. Driving crypto GDP by fueling growth across top ecosystems like Hedera, Polygon, ApeChain. ~$100M in funding",
+          "instagram_handle": null,
+          "last_online_at": "2025-06-11T17:04:34.825Z",
+          "linkedin_handle": "/in/thriveprotocol",
+          "name": "Thrive Protocol",
+          "tiktok_handle": null,
+          "timezone": "Europe/Lisbon",
+          "twitter_handle": "thriveprotocol",
+          "username": "thriveprotocol",
+          "website": null,
+          "youtube_handle": "ThriveProtocol",
+          "is_visible": true,
+          "access_level": "manager"
+        },
+        {
+          "api_id": "usr-j1ZU5ZX2z0vBKKM",
+          "avatar_url": "https://images.lumacdn.com/avatars/lw/da98b256-1892-4d00-ada3-0dfbc6d11521.png",
+          "bio_short": "A community of founders & developers connecting and collaborating to shape the future of the LUKSO ecosystem.",
+          "instagram_handle": null,
+          "last_online_at": "2025-06-11T07:36:51.829Z",
+          "linkedin_handle": null,
+          "name": "LUKSO Builders Association",
+          "tiktok_handle": null,
+          "timezone": "Europe/Brussels",
+          "twitter_handle": "LUKSOBuilders",
+          "username": "LUKSOBuilders",
+          "website": null,
+          "youtube_handle": "",
+          "is_visible": true,
+          "access_level": "manager"
+        },
+        {
+          "api_id": "usr-z9C4aMfz4bkYmFg",
+          "avatar_url": "https://images.lumacdn.com/avatars/qo/21bf20a1-1d4e-42af-8085-8a618c07e7cf.jpg",
+          "bio_short": null,
+          "instagram_handle": null,
+          "last_online_at": "2025-06-11T09:08:28.734Z",
+          "linkedin_handle": null,
+          "name": "LUKSO Hub",
+          "tiktok_handle": null,
+          "timezone": "Europe/Berlin",
+          "twitter_handle": "lukso_io",
+          "username": "LUKSOhub",
+          "website": "https://lukso.network/community",
+          "youtube_handle": "",
+          "is_visible": true,
+          "access_level": "none"
+        }
+      ],
+      "referred_by": null,
+      "cover_image": {
+        "vibrant_color": null,
+        "colors": ["#1b1017", "#efefef", "#575055", "#a5a2a4"]
+      },
+      "sessions": [],
+      "ticket_types": [
+        {
+          "api_id": "evtticktyp-fdLGxHfExDIWSWm",
+          "cents": null,
+          "currency": null,
+          "description": null,
+          "ethereum_token_requirements": [],
+          "event_api_id": "evt-FKtze1LZGbzqRte",
+          "is_flexible": false,
+          "is_hidden": false,
+          "max_capacity": null,
+          "membership_restriction": null,
+          "min_cents": null,
+          "name": "Standard",
+          "require_approval": true,
+          "type": "free",
+          "valid_end_at": null,
+          "valid_start_at": null,
+          "position": "8",
+          "num_tickets_registered": 20,
+          "currency_info": null,
+          "num_guests": 20,
+          "is_disabled": false
+        }
+      ],
+      "featured_infos": [
+        {
+          "type": "calendar",
+          "avatar_url": "https://images.lumacdn.com/calendars/y2/1923a7a4-2fdb-496c-a07f-497521eb0f22",
+          "name": "Berlin Blockchain Week",
+          "path": "/berlin-blockchain-week?k=c",
+          "calendar_api_id": "cal-jHywH9g9yOpNxJm",
+          "calendar_type": "calendar_discover"
+        },
+        {
+          "type": "calendar",
+          "avatar_url": "https://images.lumacdn.com/calendars/y2/1923a7a4-2fdb-496c-a07f-497521eb0f22",
+          "name": "Berlin Blockchain Week",
+          "path": "/berlin-blockchain-week?k=c",
+          "calendar_api_id": "cal-jHywH9g9yOpNxJm",
+          "calendar_type": "calendar_discover"
+        }
+      ],
+      "categories": [
+        {
+          "api_id": "cat-crypto",
+          "description": "A complete guide to the most important crypto gatherings around the world. Join Ethereum and Solana hackathons, learn about zk and layer-2s, and immerse yourself in the world of web3.",
+          "event_count": 1142,
+          "hero_image_desktop_url": "https://images.lumacdn.com/discovery/crypto-square.png",
+          "icon_url": "https://images.lumacdn.com/discovery/btc-icon.png",
+          "name": "Crypto",
+          "page_title": "Crypto Events",
+          "simple_icon_url": "https://images.lumacdn.com/discovery/btc-icon-simple.png",
+          "slug": "crypto",
+          "social_image_url": "https://images.lumacdn.com/discovery/crypto-social.png",
+          "subscriber_count": 14649,
+          "tint_color": "#7b49ff"
+        }
+      ],
+      "ticket_info": {
+        "price": null,
+        "is_free": false,
+        "max_price": null,
+        "is_sold_out": false,
+        "spots_remaining": null,
+        "is_near_capacity": false,
+        "require_approval": true,
+        "currency_info": null
+      },
+      "subscribed_to_calendar": false,
+      "event_invite": null,
+      "role": null,
+      "sold_out": false,
+      "locale": "en",
+      "theme_meta": { "theme": "legacy" },
+      "tint_color": "#146AEB",
+      "can_register_for_multiple_tickets": false,
+      "font_title": null,
+      "description_mirror": {
+        "type": "doc",
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "text": "A soft launch for your brain before berlin blockchain week gets chaotic. ",
+                "type": "text"
+              },
+              { "type": "hard_break" },
+              { "type": "hard_break" },
+              {
+                "text": "Berlin breakfast club is a low-pressure meetup for high-impact people. no stages. no decks. just a beautifully unhinged group of founders, devs, and creative schemers showing up to talk shop, eat carbs, and maybe meet their next co-founder over a croissant.",
+                "type": "text"
+              },
+              { "type": "hard_break" },
+              { "type": "hard_break" },
+              { "text": "what to expect:", "type": "text" },
+              { "type": "hard_break" },
+              {
+                "text": "🥐 brunch nibbles + plenty of caffeine",
+                "type": "text"
+              },
+              { "type": "hard_break" },
+              { "text": "👾 people who actually build things", "type": "text" },
+              { "type": "hard_break" },
+              {
+                "text": "📸 photogenic moments for your x recap",
+                "type": "text"
+              },
+              { "type": "hard_break" },
+              {
+                "text": "🎤 mini-mic interviews with dangerously unserious questions",
+                "type": "text"
+              },
+              { "type": "hard_break" },
+              { "type": "hard_break" },
+              {
+                "text": "Hosted by",
+                "type": "text",
+                "marks": [{ "type": "bold" }]
+              },
+              { "text": " ", "type": "text" },
+              { "type": "hard_break" },
+              { "type": "hard_break" },
+              {
+                "text": "Thrive Protocol",
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": { "href": "https://www.thriveprotocol.com/ " }
+                  },
+                  { "type": "bold" }
+                ]
+              },
+              {
+                "text": " ",
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": { "href": "https://www.thriveprotocol.com/ " }
+                  }
+                ]
+              },
+              { "type": "hard_break" },
+              {
+                "text": "Thrive Protocol is the Layer Zero for builders. They drive crypto GDP by fueling growth across top ecosystems like Polygon, ApeCoin, and Hedera. ",
+                "type": "text"
+              },
+              { "type": "hard_break" },
+              { "type": "hard_break" },
+              {
+                "text": "theMiracle",
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": { "href": "https://www.themiracle.io" }
+                  },
+                  { "type": "bold" }
+                ]
+              },
+              {
+                "text": " ",
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": { "href": "https://www.themiracle.io" }
+                  }
+                ]
+              },
+              { "type": "hard_break" },
+              {
+                "text": "theMiracle is on a mission to connect digital assets with real-world benefits, creating a seamless experience for users across the crypto ecosystem.",
+                "type": "text"
+              },
+              { "type": "hard_break" },
+              { "type": "hard_break" },
+              {
+                "text": "Crypto Nomads",
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": { "href": "http://cryptonomads.org" }
+                  },
+                  { "type": "bold" }
+                ]
+              },
+              { "type": "hard_break" },
+              {
+                "text": "The go-to platform for discovering crypto events, companies, jobs and professionals.",
+                "type": "text"
+              },
+              { "type": "hard_break" },
+              { "type": "hard_break" },
+              {
+                "text": "LUKSO Builders Association",
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": { "href": "https://lukso.builders" }
+                  },
+                  { "type": "bold" }
+                ]
+              },
+              { "type": "hard_break" },
+              {
+                "text": "The LBA is a community of founders & developers connecting and collaborating to shape the future of the LUKSO ecosystem.",
+                "type": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "eth_address_requirement": null,
+      "name_requirement": "full-name",
+      "phone_number_requirement": null,
+      "solana_address_requirement": null,
+      "registration_questions": [],
+      "is_flagged": false,
+      "show_unlock_code_option": false,
+      "membership_tiers": [],
+      "membership_info": null
+    }
+  }
+}
