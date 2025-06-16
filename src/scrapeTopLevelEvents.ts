@@ -1,13 +1,8 @@
-import { CryptoScrapper } from "./src/CryptoScrapper";
+import { CryptoScrapper } from "./CryptoScrapper";
+import { EventData } from "./types/cryptonomad";
 
 function isValidId(id: string): boolean {
   return /^[a-zA-Z0-9]+$/.test(id);
-}
-
-interface EventData {
-  lumaId?: string;
-  eventLink?: string;
-  eventPageUrl?: string;
 }
 
 async function processTopLevelUrl(scrapper: CryptoScrapper, url: string) {

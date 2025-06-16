@@ -3,12 +3,7 @@ import type { Page } from "puppeteer";
 import { getTopLevelEventPath } from "./utils/urlUtils";
 // @ts-ignore
 import fetch from "node-fetch";
-
-interface EventData {
-  lumaId?: string;
-  eventLink?: string;
-  eventPageUrl?: string;
-}
+import { EventData } from "./types/cryptonomad";
 
 export class CryptoScrapper {
   async getTopLevelUrls(): Promise<string[]> {

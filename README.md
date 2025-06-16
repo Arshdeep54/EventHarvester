@@ -4,7 +4,6 @@ This project is a Node.js-based web scraper for collecting event data from [cryp
 
 ## APIs & Scraping Targets
 
-
 ### Cryptonomads Scraping
 
 - **Top-level event categories:** Scraped from the homepage
@@ -14,7 +13,6 @@ This project is a Node.js-based web scraper for collecting event data from [cryp
   - Other external event links
   - Cryptonomads event page (from "Open in New Tab")
 
-
 ### Luma API
 
 - **Endpoint:** `https://cryptonomads.org/api/luma/get_event`
@@ -22,30 +20,42 @@ This project is a Node.js-based web scraper for collecting event data from [cryp
 - **Body:** `{ "lumaEventId": "<id>" }`
 - **Returns:** JSON with event details (name, description, host, agenda, datetime, location, registration link, speakers, tags)
 
-### Cryptonomad events 
+### Cryptonomad events
 
 - **Endpoint:** `https://cryptonomads.org/api/airtable/events`
 - **Method:** POST
-- **Body:** 
-```
-payload = {
+- **Body:**
+  ```json
+  {
     "queryType": "findSideEventBySlug",
     "slug": "interopacc-TJf",
     "seriesSlug": "PermissionlessSideEvents2025"
-}
-```
+  }
+  ```
+
+## Setup
+
 1. **Install dependencies:**
    ```bash
    npm install
    ```
-2. **Run the scraper:**
+2. **Build the project:**
    ```bash
-   npx ts-node scrapeTopLevelEvents.ts
+   npm run build
+   ```
+3. **Run the scraper (example test script):**
+   ```bash
+   node dist/scrapeTopLevelEvents.js
+   ```
+   Or, for development/testing, you can use:
+   ```bash
+   npx ts-node src/scrapeTopLevelEvents.ts
    ```
 
 ## Usage
 
-- The main entry point is `scrapeTopLevelEvents.ts`.
+- All TypeScript source files, including test scripts like `scrapeTopLevelEvents.ts`, should be placed inside the `src/` directory.
+- The main entry point for testing is `src/scrapeTopLevelEvents.ts`.
 - The script will:
   1. Fetch all top-level event categories from cryptonomads.org
   2. For each event, open the side drawer and extract:
@@ -58,6 +68,6 @@ payload = {
 ## Project Structure
 
 - `src/CryptoScrapper.ts` — Main scraping logic
-- `scrapeTopLevelEvents.ts` — Script to run the full scraping workflow
+- `src/scrapeTopLevelEvents.ts` — Script to run the full scraping workflow (test/demo script)
 - `package.json` — Project dependencies
-
+- `dist/` — Compiled JavaScript output
