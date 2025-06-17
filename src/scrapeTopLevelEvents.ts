@@ -20,22 +20,24 @@ async function processTopLevelUrl(scrapper: CryptoScrapper, url: string) {
           console.log(details);
         }
       } catch (err) {
-        console.log(`Luma API failed for ${event.lumaId}, trying eventLink: ${event.eventLink}`);
-        if (event.eventLink) {
-          const details=await scrapper.getCryptoNomadEventDetails(event.eventLink);
+        console.log(`Luma API failed for ${event.lumaId}, trying eventPageUrl: ${event.eventPageUrl}`);
+        if (event.eventPageUrl) {
+          const details=await scrapper.getCryptoNomadEventDetails(event.eventPageUrl);
           if (details) {
             console.log(details);
           }
+        }else {
+          console.log(`No eventPageUrl found for ${event.lumaId}`);
         }
       }
 
     }else {
       console.log(`Invalid Luma ID: ${event.lumaId}`);
-      if (event.eventLink) {
-        console.log(`Trying eventLink: ${event.eventLink}`);
-        await scrapper.getCryptoNomadEventDetails(event.eventLink);
+      if (event.eventPageUrl) {
+        console.log(`Trying eventPageUrl: ${event.eventPageUrl}`);
+        await scrapper.getCryptoNomadEventDetails(event.eventPageUrl);
       }else {
-        console.log(`No eventLink found for ${event.lumaId}`);
+        console.log(`No eventPageUrl found for ${event.lumaId}`);
       }
     }
   }

@@ -3,8 +3,8 @@ import requests
 url = "https://cryptonomads.org/api/airtable/events"
 payload = {
     "queryType": "findSideEventBySlug",
-    "slug": "interopacc-TJf",
-    "seriesSlug": "PermissionlessSideEvents2025"
+    "seriesSlug": "BerBW2025",
+    "slug": "MasTJf"
 }
 headers = {
     "Content-Type": "application/json",
