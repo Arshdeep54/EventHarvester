@@ -149,6 +149,7 @@ export class CryptoScrapper {
       method: "POST", 
       headers, 
       body,
+      // @ts-ignore
       credentials: "include"
     });
     const json = await res.json();

@@ -33,41 +33,42 @@ This project is a Node.js-based web scraper for collecting event data from [cryp
   }
   ```
 
+## Luma API Endpoints
+
+The scraper uses the following Luma API endpoints:
+
+### 1. List Categories
+
+```
+GET https://api.lu.ma/discover/category/list-categories?pagination_limit=20
+```
+
+Returns a list of all available categories with their details including:
+
+- Category name
+- Description
+- Event count
+- API ID
+- Slug
+
+### 2. Get Category Events
+
+```
+GET https://api.lu.ma/discover/category/get-page?slug={category_slug}
+```
+
+Returns detailed information about a specific category including:
+
+- Category details
+- Timeline calendars (major events)
+- Event counts
+- Subscriber information
+- Location details
+- Event descriptions
+
 ## Setup
 
 1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-2. **Build the project:**
-   ```bash
-   npm run build
-   ```
-3. **Run the scraper (example test script):**
-   ```bash
-   node dist/scrapeTopLevelEvents.js
-   ```
-   Or, for development/testing, you can use:
-   ```bash
-   npx ts-node src/scrapeTopLevelEvents.ts
    ```
 
-## Usage
-
-- All TypeScript source files, including test scripts like `scrapeTopLevelEvents.ts`, should be placed inside the `src/` directory.
-- The main entry point for testing is `src/scrapeTopLevelEvents.ts`.
-- The script will:
-  1. Fetch all top-level event categories from cryptonomads.org
-  2. For each event, open the side drawer and extract:
-     - Luma event ID (if available)
-     - Direct event link
-     - Cryptonomads event page URL
-  3. Attempt to fetch detailed event data from the Luma API
-  4. If the Luma API fails, fallback to scraping the Cryptonomads event page (stub for now)
-
-## Project Structure
-
-- `src/CryptoScrapper.ts` — Main scraping logic
-- `src/scrapeTopLevelEvents.ts` — Script to run the full scraping workflow (test/demo script)
-- `package.json` — Project dependencies
-- `dist/` — Compiled JavaScript output
+   ```
