@@ -135,4 +135,33 @@ export class LumaScraper {
       throw error;
     }
   }
+
+  async fetchSubEvents(calendar_api_id: string, limit: number = 20): Promise<any[]> {
+    try {
+      const url = `https://api.lu.ma/calendar/get-items?calendar_api_id=${calendar_api_id}&pagination_limit=${limit}&period=future`;
+      console.log(`Fetching sub-events for calendar_api_id: ${calendar_api_id}`);
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`API request failed with status ${response.status}`);
+      }
+      const data = await response.json();
+      if (!Array.isArray(data.entries)) return [];
+      // Extract basic info for each sub-event
+      return data.entries.map((entry: any) => {
+        const ev = entry.event || {};
+        return {
+          id: ev.api_id || entry.api_id,
+          name: ev.name,
+          start_at: ev.start_at,
+          end_at: ev.end_at,
+          location: ev.geo_address_info?.full_address || ev.geo_address_info?.city || '',
+          url: ev.url,
+          calendar_api_id: ev.calendar_api_id,
+        };
+      });
+    } catch (error) {
+      console.error('Error fetching sub-events:', error);
+      return [];
+    }
+  }
 }

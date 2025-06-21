@@ -1,0 +1,130 @@
+{
+    "entries": [
+        {
+            "api_id": "calev-lWSxLEFWaIwFdGU",
+            "event": {
+                "api_id": "evt-ODZ2LuQ7pUwQ6AE",
+                "calendar_api_id": "cal-EmDgE5KIVBHgKiW",
+                "cover_url": "https://images.lumacdn.com/event-covers/eo/e506b0fc-a4c5-4f14-956c-1d49e7899d63.png",
+                "end_at": "2025-06-23T22:30:00.000Z",
+                "event_type": "independent",
+                "geo_latitude": "40.722319",
+                "geo_longitude": "-73.957821",
+                "hide_rsvp": false,
+                "location_type": "offline",
+                "name": "Akash Accelerate 2025",
+                "one_to_one": true,
+                "recurrence_id": null,
+                "show_guest_list": true,
+                "start_at": "2025-06-23T13:30:00.000Z",
+                "timezone": "America/New_York",
+                "url": "AkashAccelerate25",
+                "user_api_id": "usr-JOcS2qIHSiPMAGG",
+                "visibility": "public",
+                "waitlist_enabled": true,
+                "virtual_info": {
+                    "has_access": false
+                },
+                "geo_address_info": {
+                    "city": "Kings County",
+                    "type": "google",
+                    "region": "New York",
+                    "address": "74Wythe",
+                    "country": "United States",
+                    "place_id": "ChIJBUM2qYFZwokRBFKHEFmBPhg",
+                    "city_state": "Kings County, New York",
+                    "description": "",
+                    "country_code": "US",
+                    "full_address": "74Wythe, 74 Wythe Ave, Brooklyn, NY 11249, USA",
+                    "apple_maps_place_id": "I4F9680A7F4D99945",
+                    "mode": "shown"
+                },
+                "geo_address_visibility": "public",
+                "coordinate": {
+                    "longitude": -73.957821,
+                    "latitude": 40.722319
+                }
+            },
+            "cover_image": {
+                "vibrant_color": null,
+                "colors": [
+                    "#010001",
+                    "#9f8ca8",
+                    "#e1e0e9",
+                    "#614057"
+                ]
+            },
+            "calendar": {
+                "access_level": "public",
+                "api_id": "cal-EmDgE5KIVBHgKiW",
+                "avatar_url": "https://images.lumacdn.com/calendars/9x/509ca615-4ee7-4e9f-8333-c3eb388aae28.jpg",
+                "coordinate": null,
+                "cover_image_url": "https://images.lumacdn.com/calendar-cover-images/cj/76e32f2a-b1a5-45ba-bfde-4fb85444a147.png",
+                "description_short": "Join DePIN, AI, and crypto experts from around the world at one of the Akash Network's many upcoming community hosted events.",
+                "event_submission_restriction": "none",
+                "geo_city": null,
+                "geo_country": null,
+                "geo_region": null,
+                "google_measurement_id": "G-LFRGN2J2RV",
+                "instagram_handle": null,
+                "launch_status": "launched",
+                "linkedin_handle": null,
+                "luma_plus_active": true,
+                "meta_pixel_id": "654184647412382",
+                "name": "Akash Community Events",
+                "personal_user_api_id": null,
+                "refund_policy": null,
+                "slug": "akashnetworkevents",
+                "social_image_url": "https://images.lumacdn.com/calendar-cover-images/xj/9a62876b-8d34-453b-bcf4-5bfbaa7df182.png",
+                "stripe_account_id": "acct_1OTRsJEQNv4vfxnM",
+                "tax_config": null,
+                "tiktok_handle": null,
+                "timezone": null,
+                "tint_color": "#ED2B32",
+                "track_meta_ads_from_luma": false,
+                "twitter_handle": "akashnet_",
+                "verified_at": "2025-02-10T21:39:15.065Z",
+                "website": "https://akash.network/",
+                "youtube_handle": "AkashNetwork",
+                "is_personal": false
+            },
+            "start_at": "2025-06-23T13:30:00.000Z",
+            "hosts": [
+                {
+                    "api_id": "usr-JOcS2qIHSiPMAGG",
+                    "avatar_url": "https://images.lumacdn.com/avatars/0s/da7b1dfe-0720-4173-8cce-5522725457cf",
+                    "bio_short": "Sovereign infrastructure that scales • The first Supercloud to provide permissionless access to cloud resources ",
+                    "instagram_handle": null,
+                    "last_online_at": "2025-06-23T14:42:49.864Z",
+                    "linkedin_handle": null,
+                    "name": "Akash Network",
+                    "tiktok_handle": null,
+                    "timezone": "America/New_York",
+                    "twitter_handle": "akashnet_",
+                    "username": null,
+                    "website": "https://akash.network",
+                    "youtube_handle": "",
+                    "access_level": "manager",
+                    "event_api_id": "evt-ODZ2LuQ7pUwQ6AE"
+                },
+                {
+                    "api_id": "usr-mHltg8irkjFjcVC",
+                    "avatar_url": "https://images.lumacdn.com/avatars/on/c6966454-0511-4097-a1c6-545bb133412f",
+                    "bio_short": "Head of Marketing, Akash",
+                    "instagram_handle": null,
+                    "last_online_at": "2025-06-22T20:24:15.196Z",
+                    "linkedin_handle": "/in/zehorn",
+                    "name": "Zach Horn",
+                    "tiktok_handle": null,
+                    "timezone": "America/New_York",
+                    "twitter_handle": "zacharyhorn",
+                    "username": null,
+                    "website": null,
+                    "youtube_handle": null,
+                    "access_level": "manager",
+                    "event_api_id": "evt-ODZ2LuQ7pUwQ6AE"
+                }
+            ]
+        }
+    ]
+}
