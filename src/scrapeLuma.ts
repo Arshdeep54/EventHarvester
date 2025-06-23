@@ -7,9 +7,6 @@ async function main() {
   try {
     console.log('Starting Luma category scraping test...');
     
-    // Initialize the scraper
-    await scraper.initialize();
-    
     // Fetch and display categories
     const categories: Category[] = await scraper.fetchCategories();
     

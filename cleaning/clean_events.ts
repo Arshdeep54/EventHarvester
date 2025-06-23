@@ -43,6 +43,34 @@ function extractEventFields(event: any) {
   };
 }
 
+function isLumaEventFile(filename: string): boolean {
+  return filename.startsWith('luma_');
+}
+
+function cleanLumaEvent(raw: any): any {
+  // Adjust this mapping as needed based on your Luma event structure
+  const event = raw.event || raw; // adapt if your structure is different
+  return {
+    name: event.name || '',
+    tags: Array.isArray(event.tags)
+      ? event.tags.map(String)
+      : typeof event.tags === 'string' && event.tags.length > 0
+        ? event.tags.split(',').map((s: string) => s.trim())
+        : [],
+    topics: toCommaString(event.topics),
+    maplink: event.mapLink || '',
+    location: event.location || event.geo_address_info?.full_address || '',
+    seriesName: toCommaString(event.seriesName),
+    eventSeries: toCommaString(event.eventSeries),
+    startdate: event.start_at || event.startdate || event.startDate || '',
+    enddate: event.end_at || event.enddate || event.endDate || '',
+    id: event.api_id || event.id || event._id || '',
+    short_description: event.short_description || event.cached_description || '',
+    description: event.description || '',
+    organiser: event.organiser || event.organizer || (event.hosts ? event.hosts.map((h: any) => h.name).join(', ') : '')
+  };
+}
+
 function readAllEvents(): any[] {
   const files = fs.readdirSync(DATA_DIR).filter(f => f.endsWith('.json'));
   let allEvents: any[] = [];
@@ -51,7 +79,9 @@ function readAllEvents(): any[] {
     try {
       const content = fs.readFileSync(filePath, 'utf-8');
       const json = JSON.parse(content);
-      if (Array.isArray(json)) {
+      if (isLumaEventFile(file)) {
+        allEvents.push(cleanLumaEvent(json));
+      } else if (Array.isArray(json)) {
         allEvents = allEvents.concat(json.map(extractEventFields));
       } else if (Array.isArray(json.events)) {
         allEvents = allEvents.concat(json.events.map(extractEventFields));

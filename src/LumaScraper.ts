@@ -1,7 +1,8 @@
-import puppeteer from 'puppeteer';
 import { RateLimiterMemory } from 'rate-limiter-flexible';
 // @ts-ignore
 import fetch from 'node-fetch';
+import * as fs from 'fs';
+import * as path from 'path';
 import { 
   Category, 
   ScrapeEventsParams, 
@@ -23,9 +24,7 @@ export class LumaScrapingError extends Error {
 }
 
 export class LumaScraper {
-  private browser: any = null;
   private rateLimiter: RateLimiterMemory;
-  private page: any;
   private categories: Category[] = [];
 
   constructor() {
@@ -35,28 +34,28 @@ export class LumaScraper {
     });
   }
 
-  async initialize(): Promise<void> {
-    if (!this.browser) {
-      try {
-        console.log('Initializing Puppeteer browser...');
-        this.browser = await puppeteer.launch({
-          headless: false,
-          defaultViewport: null,
-          args: ['--no-sandbox']
-        });
-        console.log('Browser initialized successfully');
-      } catch (error) {
-        console.error('Failed to initialize browser:', error);
-        throw error;
-      }
-    }
+  async close(): Promise<void> {
+    // No browser to close
   }
 
-  async close(): Promise<void> {
-    if (this.browser) {
-      await this.browser.close();
-      this.browser = null;
+  // Utility to sanitize filenames
+  private sanitizeFilename(str: string) {
+    return str.replace(/[^a-zA-Z0-9-_]/g, '_');
+  }
+
+  // Save Luma event to data directory
+  private saveLumaEvent(eventData: any, url: string) {
+    const dataDir = path.join(__dirname, '../data');
+    if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir);
+    const safeUrl = this.sanitizeFilename(url);
+    const filePath = path.join(dataDir, `luma_${safeUrl}.json`);
+    if (fs.existsSync(filePath)) {
+      // File already exists, skip saving
+      console.log(`File already exists, skipping: ${filePath}`);
+      return;
     }
+    fs.writeFileSync(filePath, JSON.stringify(eventData, null, 2));
+    console.log(`Saved Luma event to ${filePath}`);
   }
 
   async fetchCategories(): Promise<Category[]> {
@@ -146,9 +145,13 @@ export class LumaScraper {
       }
       const data = await response.json();
       if (!Array.isArray(data.entries)) return [];
-      // Extract basic info for each sub-event
+      // Extract basic info for each sub-event and save each event
       return data.entries.map((entry: any) => {
         const ev = entry.event || {};
+        // Save the full event data using the event's url as filename
+        if (ev.url) {
+          this.saveLumaEvent(entry, ev.url);
+        }
         return {
           id: ev.api_id || entry.api_id,
           name: ev.name,
