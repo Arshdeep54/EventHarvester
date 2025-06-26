@@ -24,7 +24,7 @@ async function runLumaScraper() {
       const firstMajorEvent = categoryEvents.timeline_calendars[0];
       const calendar_api_id = firstMajorEvent.calendar.api_id;
       console.log(`\n🔍 Fetching sub-events for: ${firstMajorEvent.calendar.name}`);
-      const subEvents = await scraper.fetchSubEvents(calendar_api_id);
+      const subEvents = await scraper.fetchSubEvents(calendar_api_id,firstMajorEvent);
       console.log(`✅ Found ${subEvents.length} sub-events`);
     }
     

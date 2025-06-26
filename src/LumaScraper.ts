@@ -45,7 +45,7 @@ export class LumaScraper {
 
   // Save Luma event to data directory
   private saveLumaEvent(eventData: any, url: string) {
-    const dataDir = path.join(__dirname, '../data');
+    const dataDir = path.join(__dirname, '../src/data');
     if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir);
     const safeUrl = this.sanitizeFilename(url);
     const filePath = path.join(dataDir, `luma_${safeUrl}.json`);
@@ -67,7 +67,7 @@ export class LumaScraper {
         throw new Error(`API request failed with status ${response.status}`);
       }
 
-      const data = await response.json();
+      const data = await response.json() as any;
       
       // Extract categories from the response
       this.categories = data.entries.map((entry: any) => ({
@@ -105,7 +105,7 @@ export class LumaScraper {
         throw new Error(`API request failed with status ${response.status}`);
       }
 
-      const data: CategoryPageResponse = await response.json();
+      const data = await response.json() as CategoryPageResponse;
       
       // Print category details
       console.log('\nCategory Details:');
@@ -135,7 +135,7 @@ export class LumaScraper {
     }
   }
 
-  async fetchSubEvents(calendar_api_id: string, limit: number = 20): Promise<any[]> {
+  async fetchSubEvents(calendar_api_id: string, metadata:any, limit: number = 20): Promise<any[]> {
     try {
       const url = `https://api.lu.ma/calendar/get-items?calendar_api_id=${calendar_api_id}&pagination_limit=${limit}&period=future`;
       console.log(`Fetching sub-events for calendar_api_id: ${calendar_api_id}`);
@@ -143,11 +143,12 @@ export class LumaScraper {
       if (!response.ok) {
         throw new Error(`API request failed with status ${response.status}`);
       }
-      const data = await response.json();
+      const data = await response.json() as any;
       if (!Array.isArray(data.entries)) return [];
       // Extract basic info for each sub-event and save each event
       return data.entries.map((entry: any) => {
         const ev = entry.event || {};
+        entry["seriesName"] = metadata.calendar.name;
         // Save the full event data using the event's url as filename
         if (ev.url) {
           this.saveLumaEvent(entry, ev.url);

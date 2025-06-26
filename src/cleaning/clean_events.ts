@@ -27,8 +27,8 @@ function extractEventFields(event: any) {
     tags: Array.isArray(event.tags)
       ? event.tags.map(String)
       : typeof event.tags === 'string' && event.tags.length > 0
-        ? event.tags.split(',').map((s: string) => s.trim())
-        : [],
+      ? event.tags.split(',').map((s: string) => s.trim())
+      : [],
     topics: toCommaString(event.topics),
     maplink: event.mapLink || '',
     location: event.location || '',
@@ -37,9 +37,10 @@ function extractEventFields(event: any) {
     startdate: event.startdate || event.startDate || '',
     enddate: event.enddate || event.endDate || '',
     id: event.id || event._id || '',
-    short_description: event.cached_description || event.short_description || '',
+    short_description:
+      event.cached_description || event.short_description || '',
     description: event.description || '',
-    organiser: event.organiser || event.organizer || ''
+    organiser: event.organiser || event.organizer || '',
   };
 }
 
@@ -48,31 +49,42 @@ function isLumaEventFile(filename: string): boolean {
 }
 
 function cleanLumaEvent(raw: any): any {
-  // Adjust this mapping as needed based on your Luma event structure
-  const event = raw.event || raw; // adapt if your structure is different
+  const event = raw.event || raw;
+  const seriesName= raw.seriesName || raw.name;
   return {
     name: event.name || '',
     tags: Array.isArray(event.tags)
       ? event.tags.map(String)
       : typeof event.tags === 'string' && event.tags.length > 0
-        ? event.tags.split(',').map((s: string) => s.trim())
-        : [],
+      ? event.tags.split(',').map((s: string) => s.trim())
+      : [],
     topics: toCommaString(event.topics),
-    maplink: event.mapLink || '',
-    location: event.location || event.geo_address_info?.full_address || '',
-    seriesName: toCommaString(event.seriesName),
+    maplink:
+      event.mapLink && event.mapLink.trim()
+        ? event.mapLink
+        : event.coordinate &&
+          event.coordinate.latitude &&
+          event.coordinate.longitude
+        ? `https://www.google.com/maps?q=${event.coordinate.latitude},${event.coordinate.longitude}`
+        : '',
+    location: event.location || event.geo_address_info?.city_state || '',
+    seriesName: seriesName,
     eventSeries: toCommaString(event.eventSeries),
     startdate: event.start_at || event.startdate || event.startDate || '',
     enddate: event.end_at || event.enddate || event.endDate || '',
     id: event.api_id || event.id || event._id || '',
-    short_description: event.short_description || event.cached_description || '',
+    short_description:
+      event.short_description || event.cached_description || '',
     description: event.description || '',
-    organiser: event.organiser || event.organizer || (event.hosts ? event.hosts.map((h: any) => h.name).join(', ') : '')
+    organiser:
+      event.organiser ||
+      event.organizer ||
+      (event.hosts ? event.hosts.map((h: any) => h.name).join(', ') : ''),
   };
 }
 
 function readAllEvents(): any[] {
-  const files = fs.readdirSync(DATA_DIR).filter(f => f.endsWith('.json'));
+  const files = fs.readdirSync(DATA_DIR).filter((f) => f.endsWith('.json'));
   let allEvents: any[] = [];
   for (const file of files) {
     const filePath = path.join(DATA_DIR, file);
@@ -105,19 +117,24 @@ function readCleanedEvents(): any[] {
   }
 }
 
-function main() {
+export async function cleanEvents() {
   const allEvents = readAllEvents();
   const cleanedEvents = readCleanedEvents();
-  const existingIds = new Set(cleanedEvents.map(e => e.id));
+  const existingIds = new Set(cleanedEvents.map((e) => e.id));
 
-  const newEvents = allEvents.filter(e => e.id && !existingIds.has(e.id));
+  const newEvents = allEvents.filter((e) => e.id && !existingIds.has(e.id));
   if (newEvents.length === 0) {
     console.log('No new events to add.');
     return;
   }
   const updatedEvents = cleanedEvents.concat(newEvents);
   fs.writeFileSync(CLEANED_FILE, JSON.stringify(updatedEvents, null, 2));
-  console.log(`Added ${newEvents.length} new events. Total: ${updatedEvents.length}`);
+  console.log(
+    `Added ${newEvents.length} new events. Total: ${updatedEvents.length}`
+  );
 }
 
-main(); 
+// If run directly, execute cleanEvents
+if (require.main === module) {
+  cleanEvents();
+}

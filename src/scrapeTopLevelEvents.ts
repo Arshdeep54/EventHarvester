@@ -7,10 +7,13 @@ function isValidId(id: string): boolean {
 
 async function processTopLevelUrl(scrapper: CryptoScrapper, url: string) {
   const events: EventData[] = await scrapper.getEventIdsFromTopLevelUrl(url);
-  console.log(`Found ${events[0].lumaId}, ${events[0].eventLink}, ${events[0].eventPageUrl} events for ${url}`); 
+  console.log(`Found ${events.length} events for ${url}`); 
+  
   if (events.length === 0) {
+    console.log(`No events found for ${url}`);
     return;
   }
+  
   for (const event of events) {
     if (event?.lumaId && isValidId(event.lumaId)) {
       try {

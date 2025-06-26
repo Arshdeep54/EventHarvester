@@ -30,7 +30,7 @@ async function getExistingEventIds(): Promise<Set<string>> {
   return ids;
 }
 
-async function pushEvents() {
+export async function pushToAirtable() {
   if (!fs.existsSync(CLEANED_FILE)) {
     console.error('No cleaned events file found.');
     return;
@@ -59,4 +59,7 @@ async function pushEvents() {
   console.log('Done!');
 }
 
-pushEvents(); 
+// If run directly, execute pushToAirtable
+if (require.main === module) {
+  pushToAirtable();
+} 

@@ -28,7 +28,7 @@ async function main() {
       const firstMajorEvent = categoryEvents.timeline_calendars[0];
       const calendar_api_id = firstMajorEvent.calendar.api_id;
       console.log(`\nFetching sub-events for major event: ${firstMajorEvent.calendar.name} (api_id: ${calendar_api_id})`);
-      const subEvents = await scraper.fetchSubEvents(calendar_api_id);
+      const subEvents = await scraper.fetchSubEvents(calendar_api_id,firstMajorEvent);
       console.log(`Found ${subEvents.length} sub-events:`);
       subEvents.forEach(ev => {
         console.log(`- ${ev.name} | ${ev.start_at} - ${ev.end_at} | ${ev.location} | ${ev.url}`);
