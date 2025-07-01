@@ -9,9 +9,13 @@ import * as path from 'path';
 
 export class CryptoScrapper {
   async getTopLevelUrls(): Promise<string[]> {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      headless: "new",
+      executablePath: '/usr/bin/chromium-browser',
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu']
+    });
     const page = await browser.newPage();
-    await page.goto("https://cryptonomads.org/", { waitUntil: "networkidle2" });
+    await page.goto("https://cryptonomads.org/", { waitUntil: "networkidle2",  timeout: 60000});
     await page.waitForSelector('.event-row');
     const baseUrls = await page.evaluate(() => {
       const anchors = Array.from(document.querySelectorAll('a.event-row'));
@@ -27,10 +31,19 @@ export class CryptoScrapper {
 
   async getEventIdsFromTopLevelUrl(topLevelUrl: string): Promise<EventData[]> {
     console.log(`Getting event ids from https://cryptonomads.org${topLevelUrl}`);
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      headless: "new",
+      executablePath: '/usr/bin/chromium-browser',
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu']
+    });
     const page = await browser.newPage();
-    await page.goto(`https://cryptonomads.org${topLevelUrl}`, { waitUntil: "networkidle2" });
-    await page.waitForSelector('a.thin-side-event-row');
+    
+    // Set a global timeout for this page
+    page.setDefaultTimeout(120000); // 2 minutes
+    page.setDefaultNavigationTimeout(120000); // 2 minutes
+    
+    await page.goto(`https://cryptonomads.org${topLevelUrl}`, { waitUntil: "networkidle2", timeout: 120000 });
+    await page.waitForSelector('a.thin-side-event-row', { timeout: 30000 });
     
     const eventLinks = await page.$$eval('a.thin-side-event-row', anchors => anchors.map(a => a.getAttribute('href')));
     console.log(`Found ${eventLinks} events for ${topLevelUrl}`);
@@ -39,15 +52,18 @@ export class CryptoScrapper {
     for (const link of eventLinks) {
       if (!link) continue;
       
-      // Click on the event row to open the sideDrawer
-      await page.click(`a.thin-side-event-row[href="${link}"]`);
-      
-      // Wait for the sideDrawer to appear
-      await page.waitForSelector('#sideDrawer', { timeout: 5000 });
-      console.log('sideDrawer opened');
-      let lumaId: string | undefined;
-      let eventLink: string | undefined;
-      let eventPageUrl: string | undefined;
+      try {
+        console.log(`Processing event link: ${link}`);
+        
+        // Click on the event row to open the sideDrawer
+        await page.click(`a.thin-side-event-row[href="${link}"]`);
+        
+        // Wait for the sideDrawer to appear
+        await page.waitForSelector('#sideDrawer', { timeout: 10000 });
+        console.log('sideDrawer opened');
+        let lumaId: string | undefined;
+        let eventLink: string | undefined;
+        let eventPageUrl: string | undefined;
 
       // 1. Try to get Luma ID
       try {
@@ -82,16 +98,27 @@ export class CryptoScrapper {
 
       // 3. Get Cryptonomads event  by clicking 'Open in New Tab' div
       try {
-        const newPagePromise = new Promise<string>((resolve) => {
+        const newPagePromise = new Promise<string>((resolve, reject) => {
+          const timeout = setTimeout(() => {
+            reject(new Error('Timeout waiting for new page'));
+          }, 30000); // 30 second timeout
+          
           page.once('popup', async (newPage: Page | null) => {
-            if (!newPage) {
-              console.log('No new page was opened');
-              return;
+            try {
+              clearTimeout(timeout);
+              if (!newPage) {
+                console.log('No new page was opened');
+                resolve('');
+                return;
+              }
+              await newPage.waitForNavigation({ waitUntil: 'networkidle0', timeout: 10000 });
+              const url = newPage.url();
+              await newPage.close();
+              resolve(url);
+            } catch (error) {
+              console.log('Error in popup handler:', error);
+              resolve('');
             }
-            await newPage.waitForNavigation({ waitUntil: 'networkidle0' });
-            const url = newPage.url();
-            await newPage.close();
-            resolve(url);
           });
         });
 
@@ -122,6 +149,10 @@ export class CryptoScrapper {
       await page.waitForFunction(() => !document.querySelector('#sideDrawer'), { timeout: 5000 });
       console.log('sideDrawer closed');
       events.push({ lumaId, eventLink, eventPageUrl }); 
+      } catch (error) {
+        console.log(`Error processing event link ${link}:`, error);
+        // Continue to next event if this one fails
+      }
     }
     
     await browser.close();
