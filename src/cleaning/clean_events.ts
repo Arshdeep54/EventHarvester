@@ -1,8 +1,10 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-const DATA_DIR = path.join(__dirname, '../data');
-const CLEANED_DIR = path.join(__dirname, '../cleaned_events');
+// Always resolve data and cleaned_events relative to the project root
+const PROJECT_ROOT = path.resolve(__dirname, '../../');
+const DATA_DIR = path.join(PROJECT_ROOT, 'src/data');
+const CLEANED_DIR = path.join(PROJECT_ROOT, 'src/cleaned_events');
 const CLEANED_FILE = path.join(CLEANED_DIR, 'cleaned_events.json');
 
 if (!fs.existsSync(CLEANED_DIR)) {

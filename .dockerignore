@@ -1,0 +1,7 @@
+node_modules
+data
+cleaned_events
+.git
+*.log
+dist
+tests

@@ -1,0 +1,1 @@
+* * * * * cd /app/dist/cron && node cron_scrape_and_push.js >> /app/cron.log 2>&1

@@ -1,15 +1,20 @@
-import express from 'express';
+import * as fs from 'fs';
+import * as path from 'path';
+import axios from 'axios';
+import * as dotenv from 'dotenv';
 import { LumaScraper } from '../LumaScraper';
-import { CryptoScrapper } from '../CryptoScrapper';
-import { cleanEvents } from '../cleaning/clean_events';
-import { pushToAirtable } from '../airtable/push_to_airtable';
 import { CategoryPageResponse } from '../types/luma';
+import { cleanEvents } from '../cleaning/clean_events';
 
-const app = express();
+dotenv.config();
 
-app.post('/api/scrape', async (req, res) => {
+// Always resolve data and cleaned_events relative to the project root
+const PROJECT_ROOT = path.resolve(__dirname, '../../');
+const CLEANED_FILE = path.join(PROJECT_ROOT, 'src/cleaned_events/cleaned_events.json');
+
+async function main() {
   try {
-    // Luma
+    // 1. Scrape events (Luma, Nomad, etc.)
     const lumaScraper = new LumaScraper();
     await lumaScraper.fetchCategories();
     const categoryEvents: CategoryPageResponse = await lumaScraper.fetchCategoryEvents('crypto');
@@ -31,25 +36,31 @@ app.post('/api/scrape', async (req, res) => {
         });
       }
     }
-    // Optionally fetch sub-events for each major event if needed
-    console.log('Luma Scraper complete');
-    // Nomad
-    // const nomadScraper = new CryptoScrapper();
-    // await nomadScraper.getTopLevelUrls();
-    // Optionally get events for each URL if needed
-    console.log('Nomad Scraper complete');
-    // Clean
+    // Optionally add Nomad or other scrapers here
+
+    // 2. Clean events (writes to cleaned_events.json)
     await cleanEvents();
-    console.log('Clean Events complete');   
-    // Push to Airtable
-    await pushToAirtable();
-    console.log('Push to Airtable complete');
 
-    res.json({ status: 'success', message: 'Pipeline complete!' });
+    // 3. Read cleaned events
+    if (!fs.existsSync(CLEANED_FILE)) {
+      console.error('No cleaned events file found.');
+      process.exit(1);
+    }
+    const cleanedEvents = JSON.parse(fs.readFileSync(CLEANED_FILE, 'utf-8'));
+    if (!Array.isArray(cleanedEvents) || cleanedEvents.length === 0) {
+      console.log('No cleaned events to push.');
+      process.exit(0);
+    }
+
+    // 4. Push to events API
+    const apiUrl = process.env.EVENTS_API_URL || 'http://localhost:3000/events/batch';
+    const response = await axios.post(apiUrl, cleanedEvents);
+    console.log('Pushed events to API:', response.data);
+    process.exit(0);
   } catch (err: any) {
-    res.status(500).json({ status: 'error', error: err.message });
+    console.error('Error in cron job:', err.message);
+    process.exit(1);
   }
-});
+}
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`API running on port ${PORT}`)); 
+main(); 

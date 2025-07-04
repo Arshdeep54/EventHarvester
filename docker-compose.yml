@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  cronjob:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src/data:/app/src/data
+      - ./src/cleaned_events:/app/src/cleaned_events
+      - ./src/cron/cron.log:/app/cron.log
+    restart: unless-stopped
+    env_file:
+      - .env

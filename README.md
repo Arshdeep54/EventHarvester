@@ -196,6 +196,75 @@ npm run scrape:nomad
 # 3. Clean and aggregate all events
 npm run clean
 
-# 4. Push to Airtable
-npm run push:airtable
 ```
+
+## Running the Test Events API with Docker Compose
+
+The test events API is provided for local development and testing. It uses Postgres for storage and is fully Dockerized.
+
+### 1. Start the Test API and Database
+
+```bash
+cd tests/events-api
+# Build and start the API and Postgres
+docker-compose up --build
+```
+
+- The API will be available at [http://localhost:3000/events](http://localhost:3000/events)
+- The database is available on port 55432 (host)
+
+### 2. API Endpoints
+
+- `POST /events/batch` — Batch ingest events
+- `GET /events` — View all events in an HTML table
+
+---
+
+## Running the Cron Job with Docker Compose
+
+The cron job scrapes, cleans, and pushes events to your API every 12 hours. It is fully Dockerized and can be configured for local or production use.
+
+### 1. .env Setup
+
+Create a `.env` file in your project root:
+
+```env
+# For local testing (use your host IP, not localhost)
+EVENTS_API_URL=http://172.17.0.1:3000/events/batch
+
+# For production, update this to your real API endpoint
+# EVENTS_API_URL=https://your-production-api.com/events/batch
+```
+
+- Replace `172.17.0.1` with your actual Docker host IP (see below).
+- To find your host IP:
+  ```sh
+  ip route show default | awk '/default/ {print $3}'
+  # or
+  hostname -I | awk '{print $1}'
+  ```
+
+### 2. Build and Run the Cron Job
+
+```bash
+docker-compose up --build
+```
+
+- The cron job will run every 12 hours and log output to `src/cron/cron.log`.
+- You can check logs with:
+  ```sh
+  docker logs <container_name>
+  tail -f ./src/cron/cron.log
+  ```
+
+### 3. Connecting Cron Job to Test API
+
+- Make sure the test API is running and accessible at the IP/port you set in `.env`.
+- The cron job will POST to the API endpoint specified in `EVENTS_API_URL`.
+
+### 4. For Production
+
+- Change `EVENTS_API_URL` in your `.env` to your production API endpoint.
+- No code changes required—just update the environment variable.
+
+---
